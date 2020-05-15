@@ -12,7 +12,7 @@ variables:
   azureSubscription: '9aaa2ca0-4924-4265-842a-092837eb7642'
 
   # Web app name
-  webAppName: ''
+  webAppName: 'Devops React Boilerplate'
   
   # Environment name
   environmentName: ''
