@@ -42,30 +42,19 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
 
-- stage: Deploy
-  displayName: Deploy stage
-  dependsOn: Build
-  condition: succeeded()
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy
-    environment: $(environmentName)
-    pool: 
+- stage: Post- Deploy
+  displayName: Deploy to GH Pages
+
+  jobs:  
+  - job: PostDeploy
+    displayName: Build & Deploy to GH Pages
+    pool:
       vmImage: $(vmImageName)
-    strategy:
-      runOnce:
-        deploy:
-          steps:            
-          - task: AzureRmWebAppDeployment@4
-            displayName: 'Azure App Service Deploy: Devops-React-Boilerplate'
-            inputs:
-              azureSubscription: $(azureSubscription)
-              appType: webAppLinux
-              WebAppName: $(webAppName)
-              packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
-              RuntimeStack: 'NODE|10.10'
-              StartupCommand: 'npm run start'
-              ScriptType: 'Inline Script'
-              InlineScript: |
-                npm install
-                npm run build --if-present
+
+    steps:
+    
+      ## Run the npm install/build
+    - script: |
+    npm install
+    npm run predeploy
+    npm run deploy
