@@ -55,4 +55,4 @@ stages:
     
     ## Run the npm install/build
     - script: 
-      npm run predeploy && npm run deploy
+      npm run predeploy && npm run deploy;
