@@ -20,6 +20,12 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
+  gh_user: gusma
+  gh_repo: gusma.github.io
+  gh_pass: $(github_token)
+  gh_email: gustavo.malamud@globant.com
+  gh_auth_header: $(echo -n "${gh_user}:$(github_pat)" | base64);
+
 stages:
 - stage: Build
   displayName: Build stage
