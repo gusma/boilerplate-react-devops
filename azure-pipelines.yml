@@ -15,7 +15,7 @@ variables:
   webAppName: 'Devops React Boilerplate'
   
   # Environment name
-  environmentName: ''
+  environmentName: 'Devops React Boilerplate'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
